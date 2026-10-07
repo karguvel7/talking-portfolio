@@ -11,7 +11,7 @@
   --soft: #e9e6e0;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --gutter: clamp(18px, 4vw, 64px);
-  --section-pad: clamp(96px, 14vh, 160px);
+  --section-pad: clamp(56px, 8vh, 112px);
   --max: 1320px;
 }
 
@@ -76,7 +76,7 @@ body {
 }
 
 section[id] {
-  scroll-margin-top: 5.5rem;
+  scroll-margin-top: 6.75rem;
 }
 
 .heading-serif-end {
@@ -136,26 +136,35 @@ button.pill:focus-visible {
 }
 
 .rv {
-  opacity: 0;
-  transform: translateY(18px);
-  transition:
-    opacity 0.7s var(--ease),
-    transform 0.7s var(--ease);
-  transition-delay: calc(var(--i, 0) * 70ms);
+  opacity: 1;
+  transform: none;
 }
 
-.rv.is-in {
+html.js-reveal .rv:not(.is-in) {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.55s var(--ease),
+    transform 0.55s var(--ease);
+  transition-delay: calc(var(--i, 0) * 50ms);
+}
+
+html.js-reveal .rv.is-in {
   opacity: 1;
   transform: translateY(0);
 }
 
 .rv-mask {
-  clip-path: inset(100% 0 0 0);
-  transition: clip-path 0.85s var(--ease);
-  transition-delay: calc(var(--i, 0) * 70ms);
+  clip-path: inset(0 0 0 0);
 }
 
-.rv-mask.is-in {
+html.js-reveal .rv-mask:not(.is-in) {
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 0.7s var(--ease);
+  transition-delay: calc(var(--i, 0) * 50ms);
+}
+
+html.js-reveal .rv-mask.is-in {
   clip-path: inset(0 0 0 0);
 }
 
@@ -282,6 +291,8 @@ button.pill:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html.js-reveal .rv:not(.is-in),
+  html.js-reveal .rv.is-in,
   .rv,
   .rv-mask {
     opacity: 1 !important;

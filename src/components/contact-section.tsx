@@ -6,8 +6,6 @@ import { PROFILE } from "@/lib/data";
 
 export function ContactSection() {
   const [copied, setCopied] = useState(false);
-  const title = "Let's build something together.".split(" ");
-
   const copyEmail = async () => {
     try {
       await navigator.clipboard.writeText(PROFILE.email);
@@ -23,15 +21,7 @@ export function ContactSection() {
       <div className="shell text-center">
         <p className="section-tag rv">07 — Contact</p>
         <h2 className="rv mt-6 text-[clamp(2rem,6vw,4rem)] font-bold leading-tight tracking-[-0.045em]">
-          {title.map((word, i) => (
-            <span
-              key={i}
-              className="inline-block hover:-translate-y-1 transition-transform"
-              style={{ transitionDelay: `${i * 30}ms` }}
-            >
-              {word}{" "}
-            </span>
-          ))}
+          Let&apos;s build something together.
         </h2>
         <p className="rv mt-4 max-w-xl mx-auto text-ink-2">
           Reach out for AI architecture, full-stack platform work, or open-source collaboration.

@@ -14,20 +14,23 @@ export function IdCard() {
 
   useEffect(() => {
     if (reduced) return;
+    const finePointer = window.matchMedia("(pointer: fine)").matches;
+    const narrow = window.matchMedia("(max-width: 1023px)").matches;
+    if (!finePointer || !narrow) return;
+
     let raf = 0;
     let lastX = 0;
     const onMove = (e: PointerEvent) => {
       const dx = e.clientX - lastX;
       lastX = e.clientX;
-      velocity.current += dx * 0.003;
+      velocity.current += dx * 0.002;
     };
     const loop = () => {
       velocity.current *= 0.92;
       angle.current += velocity.current;
-      angle.current += Math.sin(Date.now() / 1200) * 0.0008;
       const el = swingRef.current;
       if (el) {
-        el.style.transform = `rotate(${angle.current * 8}deg)`;
+        el.style.transform = `rotate(${angle.current * 5}deg)`;
       }
       raf = requestAnimationFrame(loop);
     };
@@ -42,13 +45,11 @@ export function IdCard() {
   const toggleFlip = () => setFlipped((f) => !f);
 
   return (
-    <div className="relative mx-auto w-[300px] pt-2">
-      <div className="mx-auto h-14 w-[30px] rounded-sm bg-[#c8c5be] shadow-sm" />
-      <div className="mx-auto -mt-1 h-3 w-10 rounded-sm bg-[#8c8983]" aria-hidden />
+    <div className="relative mx-auto w-full max-w-[300px]">
       <div
         ref={swingRef}
-        className="relative mt-2 origin-top will-change-transform"
-        style={{ transformOrigin: "50% 0%" }}
+        className="relative origin-top lg:rotate-[-2deg]"
+        style={{ transformOrigin: "50% 50%" }}
       >
         <button
           type="button"
@@ -122,14 +123,6 @@ export function IdCard() {
             </div>
           </div>
         </button>
-      </div>
-      <div
-        className="pointer-events-none absolute left-1/2 top-0 h-14 w-[56px] -translate-x-1/2 overflow-hidden rounded-sm bg-soft"
-        aria-hidden
-      >
-        <div className="animate-marquee whitespace-nowrap px-1 py-1 text-[9px] font-mono uppercase text-mute">
-          {PROFILE.name} · {PROFILE.role} ·
-        </div>
       </div>
     </div>
   );

@@ -61,6 +61,11 @@ for (const vp of VIEWPORTS) {
         await expect(menuBtn).toBeVisible();
       }
 
+      const contactHeading = page.getByRole("heading", {
+        name: "Let's build something together.",
+      });
+      await expect(contactHeading).toBeVisible();
+
       if (!isDesktop) {
         await menuBtn.click();
         await expect(page.locator("#mobile-menu")).toHaveAttribute("aria-hidden", "false");

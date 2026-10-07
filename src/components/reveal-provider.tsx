@@ -10,6 +10,9 @@ function observeRevealNodes(observer: IntersectionObserver) {
 
 export function RevealProvider() {
   useEffect(() => {
+    const root = document.documentElement;
+    root.classList.add("js-reveal");
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -19,7 +22,7 @@ export function RevealProvider() {
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+      { threshold: 0.1, rootMargin: "120px 0px -4% 0px" },
     );
 
     observeRevealNodes(observer);
@@ -30,6 +33,7 @@ export function RevealProvider() {
     return () => {
       mutation.disconnect();
       observer.disconnect();
+      root.classList.remove("js-reveal");
     };
   }, []);
 

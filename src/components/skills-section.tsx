@@ -46,7 +46,7 @@ export function SkillsSection() {
           ))}
         </div>
         <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_320px]">
-          <div className="grid grid-cols-4 gap-2 sm:grid-cols-6 lg:grid-cols-8">
+          <div className="grid grid-cols-3 gap-2 sm:grid-cols-6 lg:grid-cols-9">
             {visible.map((skill, idx) => {
               const row = Math.floor(idx / 8);
               const col = idx % 8;

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { WorkIllustration } from "@/components/work-illustration";
 import { PROJECTS } from "@/lib/data";
 
 export function WorkSection() {
@@ -14,7 +15,7 @@ export function WorkSection() {
           Projects <span className="heading-serif-end">gallery</span>
         </h2>
 
-        <div className="mt-10 hidden min-h-[420px] gap-2 md:flex">
+        <div className="mt-8 hidden min-h-0 gap-2 md:flex">
           {PROJECTS.map((project, i) => {
             const isOpen = open === i;
             return (
@@ -68,7 +69,7 @@ export function WorkSection() {
                         </a>
                       )}
                     </div>
-                    <MiniUi variant={project.uiVariant} />
+                    <WorkIllustration variant={project.uiVariant} />
                   </div>
                 )}
               </article>
@@ -111,37 +112,3 @@ export function WorkSection() {
   );
 }
 
-function MiniUi({ variant }: { variant: "cli" | "platform" | "incident" }) {
-  return (
-    <div className="relative">
-      <p className="mb-2 font-mono text-xs text-mute">Illustrative UI</p>
-      <div className="card overflow-hidden bg-[#faf9f7] p-4 grayscale">
-        <div
-          className="rv-mask h-48 rounded-xl border border-line bg-white p-3"
-          style={{ "--i": 2 } as React.CSSProperties}
-        >
-          {variant === "cli" && (
-            <pre className="font-mono text-[10px] text-ink-2">
-              $ specguard check --base openapi/v1.yaml --head openapi/v2.yaml
-              {"\n"}✖ breaking: removed GET /users/{"{id}"}
-            </pre>
-          )}
-          {variant === "platform" && (
-            <div className="grid grid-cols-3 gap-2">
-              {Array.from({ length: 6 }).map((_, i) => (
-                <div key={i} className="h-8 rounded bg-soft" />
-              ))}
-            </div>
-          )}
-          {variant === "incident" && (
-            <div className="space-y-2">
-              <div className="h-3 w-2/3 rounded bg-soft" />
-              <div className="h-3 w-full rounded bg-soft" />
-              <div className="h-3 w-5/6 rounded bg-soft" />
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}

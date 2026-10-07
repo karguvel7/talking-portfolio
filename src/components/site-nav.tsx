@@ -60,14 +60,20 @@ export function SiteNav() {
 
   return (
     <>
-      <div className="fixed inset-x-0 top-0 z-[70] h-0.5 bg-soft" aria-hidden>
+      <div className="fixed inset-x-0 top-0 z-[70] h-[3px] bg-soft" aria-hidden>
         <div
           className="h-full origin-left bg-ink transition-transform duration-150"
           style={{ transform: "scaleX(0)" }}
           id="scroll-progress-bar"
         />
       </div>
-      <header className="fixed inset-x-0 top-0 z-[60] pt-3">
+      <header
+        className={`fixed inset-x-0 top-0 z-[60] border-b transition-[background,box-shadow,border-color] duration-300 ${
+          scrolled
+            ? "border-line bg-paper/92 pt-3 pb-3 shadow-[0_8px_30px_rgba(13,13,13,0.06)] backdrop-blur-lg"
+            : "border-transparent bg-transparent pt-3 pb-3"
+        }`}
+      >
         <div className="shell flex items-center justify-between gap-4">
           <a
             href="#hero"
