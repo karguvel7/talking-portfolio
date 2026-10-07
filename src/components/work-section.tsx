@@ -9,7 +9,7 @@ export function WorkSection() {
   return (
     <section id="work" className="section-pad border-t border-line">
       <div className="shell">
-        <p className="section-tag rv">04 — Selected work</p>
+        <p className="section-tag rv">05 — Selected work</p>
         <h2 className="rv mt-4 text-4xl font-bold tracking-[-0.045em] md:text-5xl">
           Projects <span className="heading-serif-end">gallery</span>
         </h2>

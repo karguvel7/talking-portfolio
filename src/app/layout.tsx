@@ -3,6 +3,9 @@ import "./globals.css";
 import { interTight, instrumentSerif, jetbrainsMono } from "./fonts";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { RevealProvider } from "@/components/reveal-provider";
+import { CursorSpotlight } from "@/components/cursor-spotlight";
+import { SpotlightWire } from "@/components/spotlight-wire";
+import { PageAtmosphere } from "@/components/page-atmosphere";
 import { SiteNav } from "@/components/site-nav";
 import { OG_IMAGE } from "@/lib/assets";
 import { siteBaseUrl } from "@/lib/base-path";
@@ -35,10 +38,13 @@ export default function RootLayout({
       className={`${interTight.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`}
     >
       <body className="antialiased">
+        <PageAtmosphere />
+        <CursorSpotlight />
+        <SpotlightWire />
         <SmoothScroll />
         <RevealProvider />
         <SiteNav />
-        <main>{children}</main>
+        <main className="relative z-10">{children}</main>
       </body>
     </html>
   );

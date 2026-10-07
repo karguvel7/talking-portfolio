@@ -1,5 +1,5 @@
 import { IdCard } from "@/components/id-card";
-import { PROFILE } from "@/lib/data";
+import { INNOART_ROLES, PROFILE } from "@/lib/data";
 
 export function AboutSection() {
   return (
@@ -8,7 +8,7 @@ export function AboutSection() {
         <p className="section-tag rv" style={{ "--i": 0 } as React.CSSProperties}>
           02 — About
         </p>
-        <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_320px_1fr]">
+        <div className="mt-10 grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_300px_minmax(0,1fr)] lg:gap-8 xl:gap-12">
           <div>
             <h2
               className="rv text-4xl font-bold tracking-[-0.045em] md:text-5xl"
@@ -23,6 +23,9 @@ export function AboutSection() {
             >
               {PROFILE.summary}
             </p>
+            <p className="rv mt-4 text-sm text-ink-2" style={{ "--i": 2 } as React.CSSProperties}>
+              {PROFILE.aboutBack}
+            </p>
             <div
               className="rv mt-8 flex flex-wrap gap-3"
               style={{ "--i": 3 } as React.CSSProperties}
@@ -31,14 +34,28 @@ export function AboutSection() {
                 GitHub ↗
               </a>
             </div>
+            <div className="rv mt-8" style={{ "--i": 4 } as React.CSSProperties}>
+              <p className="text-xs font-bold uppercase tracking-widest text-mute">
+                Innoart progression
+              </p>
+              <ol className="mt-3 space-y-2 border-l border-line pl-4">
+                {INNOART_ROLES.map((role) => (
+                  <li key={role.title} className="text-sm">
+                    <span className="font-semibold text-ink">{role.title}</span>
+                    <span className="text-mute">
+                      {" "}
+                      · {role.start} — {role.end}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            </div>
           </div>
-          <div className="rv" style={{ "--i": 2 } as React.CSSProperties}>
+          <div className="rv mx-auto w-full max-w-[300px] lg:mx-0" style={{ "--i": 2 } as React.CSSProperties}>
             <IdCard />
           </div>
           <div>
-            <h3 className="text-sm font-bold uppercase tracking-widest text-mute">
-              Quick facts
-            </h3>
+            <h3 className="text-sm font-bold uppercase tracking-widest text-mute">Quick facts</h3>
             <ul className="mt-4 space-y-3 text-ink-2">
               <li>
                 <span className="text-mute">Location · </span>
@@ -59,7 +76,7 @@ export function AboutSection() {
                 </a>
               </li>
             </ul>
-            <blockquote className="card mt-8 p-5 text-sm italic text-ink-2">
+            <blockquote className="card spotlight-card rv mt-8 p-5 text-sm italic text-ink-2">
               “{PROFILE.quote}”
             </blockquote>
           </div>

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { PORTRAIT_BUST } from "@/lib/assets";
 import { PROFILE } from "@/lib/data";
@@ -8,7 +7,7 @@ import { usePrefersReducedMotion } from "@/hooks/prefersReducedMotion";
 
 export function IdCard() {
   const reduced = usePrefersReducedMotion();
-  const cardRef = useRef<HTMLDivElement>(null);
+  const swingRef = useRef<HTMLDivElement>(null);
   const [flipped, setFlipped] = useState(false);
   const angle = useRef(0);
   const velocity = useRef(0);
@@ -26,7 +25,7 @@ export function IdCard() {
       velocity.current *= 0.92;
       angle.current += velocity.current;
       angle.current += Math.sin(Date.now() / 1200) * 0.0008;
-      const el = cardRef.current;
+      const el = swingRef.current;
       if (el) {
         el.style.transform = `rotate(${angle.current * 8}deg)`;
       }
@@ -47,13 +46,13 @@ export function IdCard() {
       <div className="mx-auto h-14 w-[30px] rounded-sm bg-[#c8c5be] shadow-sm" />
       <div className="mx-auto -mt-1 h-3 w-10 rounded-sm bg-[#8c8983]" aria-hidden />
       <div
-        ref={cardRef}
-        className="relative mt-2 origin-top"
+        ref={swingRef}
+        className="relative mt-2 origin-top will-change-transform"
         style={{ transformOrigin: "50% 0%" }}
       >
         <button
           type="button"
-          className="group relative mx-auto block w-full border-0 bg-transparent p-0 [perspective:1000px]"
+          className="group relative mx-auto block w-full border-0 bg-transparent p-0 [perspective:1200px]"
           onClick={toggleFlip}
           onKeyDown={(e) => {
             if (e.key === "Enter" || e.key === " ") {
@@ -69,18 +68,19 @@ export function IdCard() {
               flipped ? "[transform:rotateY(180deg)]" : ""
             }`}
           >
-            <div className="card absolute inset-0 overflow-hidden [backface-visibility:hidden]">
+            <div className="card absolute inset-0 overflow-hidden [backface-visibility:hidden] [transform:translateZ(1px)]">
               <div className="bg-ink px-4 py-2 text-center text-xs font-bold tracking-[0.2em] text-paper">
                 ARCHITECT ID
               </div>
               <div className="flex flex-col items-center px-5 pb-5 pt-4">
                 <div className="h-[156px] w-[128px] overflow-hidden rounded-full ring-2 ring-line">
-                  <Image
+                  <img
                     src={PORTRAIT_BUST}
                     alt=""
                     width={128}
                     height={156}
                     className="h-full w-full object-cover"
+                    decoding="async"
                   />
                 </div>
                 <p className="mt-4 text-lg font-bold">{PROFILE.fullName}</p>
@@ -108,7 +108,7 @@ export function IdCard() {
               </div>
             </div>
             <div
-              className="card absolute inset-0 flex flex-col justify-between p-5 [backface-visibility:hidden] [transform:rotateY(180deg)]"
+              className="card absolute inset-0 flex flex-col justify-between p-5 [backface-visibility:hidden] [transform:rotateY(180deg)_translateZ(1px)]"
             >
               <div>
                 <p className="text-xs font-bold uppercase tracking-widest text-mute">

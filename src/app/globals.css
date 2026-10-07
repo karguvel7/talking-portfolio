@@ -174,6 +174,87 @@ body {
   animation: spin-slow 18s linear infinite;
 }
 
+@keyframes marquee-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-x {
+  animation: marquee-x 42s linear infinite;
+}
+
+.page-grid {
+  background-image:
+    linear-gradient(rgba(13, 13, 13, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(13, 13, 13, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 85%);
+}
+
+.blob {
+  filter: blur(60px);
+  opacity: 0.55;
+  animation: blob-drift 22s ease-in-out infinite alternate;
+}
+
+.blob-b {
+  animation-duration: 28s;
+  animation-delay: -6s;
+}
+
+.blob-c {
+  animation-duration: 26s;
+  animation-delay: -12s;
+}
+
+@keyframes blob-drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(24px, -18px, 0) scale(1.06);
+  }
+}
+
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    420px circle at var(--spot-x, 50%) var(--spot-y, 0%),
+    rgba(13, 13, 13, 0.06),
+    transparent 45%
+  );
+  opacity: 0;
+  transition: opacity 0.35s var(--ease);
+  pointer-events: none;
+}
+
+.spotlight-card:hover::before,
+.spotlight-card:focus-within::before {
+  opacity: 1;
+}
+
+@media (pointer: fine) {
+  .spotlight-card {
+    --spot-x: 50%;
+    --spot-y: 0%;
+  }
+}
+
+.magnetic-pill {
+  will-change: transform;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .rv,
   .rv-mask {
@@ -189,5 +270,14 @@ body {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .animate-marquee-x,
+  .blob {
+    animation: none !important;
+  }
+
+  .tilt-card {
+    transform: none !important;
   }
 }

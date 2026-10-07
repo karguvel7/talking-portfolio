@@ -1,16 +1,26 @@
 "use client";
 
-import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useInView } from "@/hooks/useInView";
 import { usePrefersReducedMotion } from "@/hooks/prefersReducedMotion";
 import { INTRO_MP4, INTRO_POSTER } from "@/lib/assets";
 
 export function HeroMedia() {
-  const [wrapRef, inView] = useInView<HTMLDivElement>({ threshold: 0.35, once: false });
+  const [wrapRef, inView] = useInView<HTMLDivElement>({ threshold: 0.15, once: false });
   const videoRef = useRef<HTMLVideoElement>(null);
   const [muted, setMuted] = useState(true);
   const reduced = usePrefersReducedMotion();
+
+  const tryPlay = useCallback(async () => {
+    const v = videoRef.current;
+    if (!v || reduced) return;
+    v.muted = muted;
+    try {
+      await v.play();
+    } catch {
+      /* autoplay blocked */
+    }
+  }, [muted, reduced]);
 
   const toggleSound = useCallback(async () => {
     const v = videoRef.current;
@@ -33,10 +43,18 @@ export function HeroMedia() {
     if (!v || reduced) return;
     if (!inView) {
       v.pause();
-    } else {
-      void v.play().catch(() => undefined);
+      return;
     }
-  }, [inView, reduced]);
+    void tryPlay();
+  }, [inView, reduced, tryPlay]);
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v || reduced) return;
+    const onCanPlay = () => void tryPlay();
+    v.addEventListener("canplay", onCanPlay);
+    return () => v.removeEventListener("canplay", onCanPlay);
+  }, [reduced, tryPlay]);
 
   return (
     <div
@@ -44,7 +62,7 @@ export function HeroMedia() {
       className="relative mx-auto aspect-[768/960] w-full max-w-[min(92vw,520px)] max-h-[min(96svh,1040px)]"
     >
       <p
-        className="pointer-events-none absolute inset-x-0 top-[12%] text-center text-[clamp(3rem,14vw,7.5rem)] font-bold tracking-[-0.06em] text-transparent"
+        className="pointer-events-none absolute inset-x-0 top-[10%] z-0 mx-auto w-full max-w-[18ch] text-center text-[clamp(2.5rem,11vw,6.5rem)] font-bold leading-none tracking-[-0.06em] text-transparent"
         style={{ WebkitTextStroke: "1px rgba(13,13,13,.12)" }}
         aria-hidden
       >
@@ -52,12 +70,11 @@ export function HeroMedia() {
       </p>
 
       {reduced ? (
-        <Image
+        <img
           src={INTRO_POSTER}
           alt="Karguvel K, AI Architect"
           width={480}
           height={600}
-          priority
           className="relative z-10 h-full w-full object-contain mix-blend-multiply"
         />
       ) : (
@@ -65,16 +82,15 @@ export function HeroMedia() {
           <video
             ref={videoRef}
             className="relative z-10 h-full w-full object-contain mix-blend-multiply"
+            src={INTRO_MP4}
             playsInline
             loop
             muted={muted}
             autoPlay
-            preload="metadata"
+            preload="auto"
             poster={INTRO_POSTER}
             aria-label="Introduction video of Karguvel K"
-          >
-            <source src={INTRO_MP4} type="video/mp4" />
-          </video>
+          />
           <button
             type="button"
             className="absolute bottom-4 right-0 z-20 flex h-[46px] min-w-[46px] items-center justify-center gap-1 rounded-full bg-ink px-3 text-paper sm:bottom-6"

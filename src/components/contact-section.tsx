@@ -21,7 +21,7 @@ export function ContactSection() {
   return (
     <section id="contact" className="section-pad border-t border-line">
       <div className="shell text-center">
-        <p className="section-tag rv">06 — Contact</p>
+        <p className="section-tag rv">07 — Contact</p>
         <h2 className="rv mt-6 text-[clamp(2rem,6vw,4rem)] font-bold leading-tight tracking-[-0.045em]">
           {title.map((word, i) => (
             <span

@@ -39,8 +39,6 @@ export function SiteNav() {
     if (!bar || !wrap) return;
     const link = wrap.querySelector<HTMLAnchorElement>(`[data-nav="${active}"]`);
     if (!link) return;
-    const parent = link.parentElement;
-    if (!parent) return;
     bar.style.width = `${link.offsetWidth}px`;
     bar.style.transform = `translateX(${link.offsetLeft}px)`;
   }, [active, scrolled]);
@@ -58,23 +56,27 @@ export function SiteNav() {
     };
   }, [open]);
 
+  const closeMenu = () => setOpen(false);
+
   return (
     <>
-      <div
-        className="fixed inset-x-0 top-0 z-50 h-0.5 bg-soft"
-        aria-hidden
-      >
+      <div className="fixed inset-x-0 top-0 z-[70] h-0.5 bg-soft" aria-hidden>
         <div
           className="h-full origin-left bg-ink transition-transform duration-150"
-          style={{
-            transform: `scaleX(${typeof window === "undefined" ? 0 : undefined})`,
-          }}
+          style={{ transform: "scaleX(0)" }}
           id="scroll-progress-bar"
         />
       </div>
-      <header className="fixed inset-x-0 top-0 z-40 pt-3">
+      <header className="fixed inset-x-0 top-0 z-[60] pt-3">
         <div className="shell flex items-center justify-between gap-4">
-          <a href="#" className="group flex items-center gap-3 no-underline text-ink">
+          <a
+            href="#hero"
+            className="group flex items-center gap-3 no-underline text-ink"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToTarget("#hero", 0);
+            }}
+          >
             <span
               className={`grid h-11 w-11 place-items-center rounded-full border border-ink text-sm font-bold transition-all duration-500 ease-[var(--ease)] group-hover:rotate-[360deg] ${
                 scrolled ? "bg-ink text-paper" : "bg-transparent"
@@ -125,38 +127,41 @@ export function SiteNav() {
 
           <button
             type="button"
-            className="pill md:hidden"
+            className="pill relative z-[80] md:hidden"
             aria-expanded={open}
             aria-controls="mobile-menu"
             onClick={() => setOpen((v) => !v)}
           >
-            Menu
+            {open ? "Close" : "Menu"}
           </button>
         </div>
       </header>
 
       <div
         id="mobile-menu"
-        className={`fixed inset-0 z-50 bg-paper transition-[clip-path] duration-700 ease-[var(--ease)] md:hidden ${
-          open ? "clip-path-open" : "clip-path-closed"
+        className={`fixed inset-0 z-[75] bg-paper/95 backdrop-blur-md transition-opacity duration-500 ease-[var(--ease)] md:hidden ${
+          open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
+        aria-hidden={!open}
         style={{
-          clipPath: open
-            ? "circle(150% at 100% 0%)"
-            : "circle(0% at 100% 0%)",
+          clipPath: open ? "circle(150% at 100% 0%)" : "circle(0% at 100% 0%)",
+          transition: "clip-path 0.7s var(--ease), opacity 0.35s ease",
         }}
-        hidden={!open}
       >
         <div className="shell flex h-full flex-col justify-center gap-6 pt-20">
+          <button type="button" className="pill absolute right-6 top-6" onClick={closeMenu}>
+            Close
+          </button>
           {NAV.map((item, i) => (
             <a
               key={item.id}
               href={item.href}
+              tabIndex={open ? 0 : -1}
               className="rv is-in flex items-baseline gap-4 text-4xl font-bold tracking-tight text-ink no-underline"
               style={{ "--i": i } as React.CSSProperties}
               onClick={(e) => {
                 e.preventDefault();
-                setOpen(false);
+                closeMenu();
                 scrollToTarget(item.href, -72);
               }}
             >

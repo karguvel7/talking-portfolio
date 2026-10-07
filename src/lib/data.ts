@@ -24,9 +24,81 @@ export const PROFILE = {
 export const NAV = [
   { id: "about", label: "About", href: "#about" },
   { id: "skills", label: "Skills", href: "#skills" },
+  { id: "domains", label: "Domains", href: "#domains" },
   { id: "work", label: "Work", href: "#work" },
   { id: "experience", label: "Experience", href: "#experience" },
   { id: "contact", label: "Contact", href: "#contact" },
+] as const;
+
+/** Industry domains from resume / enterprise delivery scope */
+export const DOMAINS = [
+  {
+    id: "edutech",
+    label: "EduTech",
+    blurb:
+      "Incident Management System and Social Media Hub for a top educational organization.",
+  },
+  {
+    id: "healthcare",
+    label: "Healthcare",
+    blurb: "Enterprise programs at Innoart Technologies — APIs, microservices, and cloud.",
+  },
+  {
+    id: "fintech",
+    label: "FinTech",
+    blurb: "OAuth 2.0, OpenAPI-documented services, AWS and Azure deployments.",
+  },
+  {
+    id: "manufacturing",
+    label: "Manufacturing",
+    blurb: "Digital Transformation Platform delivery with micro frontends and Agile teams.",
+  },
+  {
+    id: "hcm",
+    label: "HCM",
+    blurb: "Workforce and HR-adjacent modules within enterprise SaaS platforms.",
+  },
+  {
+    id: "payments",
+    label: "Digital payments",
+    blurb: "Payment flows within full-stack Angular/React and Node.js platforms.",
+  },
+  {
+    id: "marketplaces",
+    label: "Marketplaces",
+    blurb: "Multi-module platforms with React clients and documented REST APIs.",
+  },
+] as const;
+
+export const INNOART_ROLES = [
+  { title: "Trainee Software Engineer", start: "Feb 2017", end: "Feb 2018" },
+  { title: "Software Engineer", start: "Feb 2018", end: "Feb 2020" },
+  { title: "Senior Software Engineer", start: "Feb 2020", end: "Feb 2022" },
+  { title: "Lead Software Engineering", start: "Feb 2022", end: "Sep 2026" },
+  { title: "AI Architect", start: "Sep 2026", end: "Present" },
+] as const;
+
+export const TECH_MARQUEE = [
+  "Angular",
+  "React",
+  "Node.js",
+  "Python",
+  "TypeScript",
+  "OpenAPI",
+  "OAuth 2.0",
+  "Microservices",
+  "Micro frontends",
+  "Three.js",
+  "LLMs",
+  "AI workflows",
+  "MongoDB",
+  "Neo4J",
+  "MySQL",
+  "ClickHouse",
+  "AWS",
+  "Azure",
+  "Docker",
+  "GitHub Actions",
 ] as const;
 
 export type SkillFamily =
@@ -129,6 +201,13 @@ export const SKILLS: SkillEntry[] = skillRows.flatMap((group, gi) =>
     slug: slugify(name),
   })),
 );
+
+export const HIGHLIGHT_STATS = [
+  { id: "tenure", value: 9, suffix: "+", label: "Years at Innoart", detail: "Since Feb 2017" },
+  { id: "roles", value: INNOART_ROLES.length, suffix: "", label: "Role progression", detail: "Trainee → AI Architect" },
+  { id: "domains", value: DOMAINS.length, suffix: "", label: "Industry domains", detail: "EduTech to marketplaces" },
+  { id: "skills", value: SKILLS.length, suffix: "", label: "Stack skills", detail: "Frontend through cloud" },
+] as const;
 
 export const EXPERIENCE = [
   {
