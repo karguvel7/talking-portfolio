@@ -25,6 +25,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     images: [OG_IMAGE],
   },
+  icons: {
+    icon: [{ url: OG_IMAGE, type: "image/jpeg" }],
+    apple: [{ url: OG_IMAGE }],
+  },
 };
 
 export default function RootLayout({

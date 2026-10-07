@@ -34,6 +34,13 @@
 
 html {
   scroll-behavior: auto;
+  overflow-x: clip;
+}
+
+@media (min-width: 768px) {
+  .nav-mobile-trigger {
+    display: none !important;
+  }
 }
 
 html.lenis,
@@ -66,6 +73,10 @@ body {
 
 .section-pad {
   padding-block: var(--section-pad);
+}
+
+section[id] {
+  scroll-margin-top: 5.5rem;
 }
 
 .heading-serif-end {
@@ -111,6 +122,17 @@ body {
 .pill:hover {
   transform: translateY(-1px);
   border-color: rgba(13, 13, 13, 0.2);
+}
+
+.pill:focus-visible,
+button.pill:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.work-panel:focus-within {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
 }
 
 .rv {
@@ -181,6 +203,10 @@ body {
   to {
     transform: translateX(-50%);
   }
+}
+
+.marquee-track {
+  animation: marquee-x 42s linear infinite;
 }
 
 .animate-marquee-x {

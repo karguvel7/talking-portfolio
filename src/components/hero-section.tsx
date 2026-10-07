@@ -8,8 +8,8 @@ export function HeroSection() {
   return (
     <>
       <section id="hero" className="section-pad pt-28">
-        <div className="shell grid items-end gap-8 lg:grid-cols-[minmax(0,1fr)_clamp(280px,38vw,520px)] lg:gap-10 xl:gap-14">
-          <div className="order-2 lg:order-1 lg:pb-10 xl:pb-14">
+        <div className="shell grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(300px,44vw)] lg:gap-12 xl:grid-cols-[1fr_580px] xl:gap-16">
+          <div className="order-2 lg:order-1">
             <p className="section-tag rv" style={{ "--i": 0 } as React.CSSProperties}>
               01 — Introduction
             </p>
@@ -36,16 +36,19 @@ export function HeroSection() {
               className="rv mt-8 flex flex-wrap gap-3"
               style={{ "--i": 3 } as React.CSSProperties}
             >
-              <MagneticPill className="bg-ink text-paper" href="#work">
-                Explore work
+              <MagneticPill className="bg-ink text-paper" href={`mailto:${PROFILE.email}`}>
+                Email me
               </MagneticPill>
-              <MagneticPill href="#contact">Let&apos;s talk</MagneticPill>
+              <MagneticPill href={PROFILE.github} target="_blank" rel="noreferrer">
+                GitHub ↗
+              </MagneticPill>
+              <MagneticPill href="#contact">Contact</MagneticPill>
             </div>
-            <div className="rv mt-10" style={{ "--i": 4 } as React.CSSProperties}>
+            <div className="rv mt-10 min-w-0" style={{ "--i": 4 } as React.CSSProperties}>
               <StatCounters />
             </div>
           </div>
-          <div className="order-1 w-full lg:order-2 lg:justify-self-end">
+          <div className="order-1 w-full min-w-0 lg:order-2">
             <HeroMedia />
           </div>
         </div>

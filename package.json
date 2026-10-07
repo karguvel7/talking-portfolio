@@ -10,6 +10,7 @@
     "lint": "eslint src tests playwright.config.ts",
     "typecheck": "tsc --noEmit",
     "test:e2e": "playwright test",
+    "test:qa": "playwright test tests/qa.spec.ts",
     "hero:assets": "python3 scripts/build-hero-assets.py"
   },
   "engines": {

@@ -59,52 +59,56 @@ export function HeroMedia() {
   return (
     <div
       ref={wrapRef}
-      className="relative mx-auto aspect-[768/960] w-full max-w-[min(92vw,520px)] max-h-[min(96svh,1040px)]"
+      className="relative mx-auto w-full max-w-[min(100%,580px)]"
     >
-      <p
-        className="pointer-events-none absolute inset-x-0 top-[10%] z-0 mx-auto w-full max-w-[18ch] text-center text-[clamp(2.5rem,11vw,6.5rem)] font-bold leading-none tracking-[-0.06em] text-transparent"
-        style={{ WebkitTextStroke: "1px rgba(13,13,13,.12)" }}
-        aria-hidden
-      >
-        KARGUVEL
-      </p>
-
-      {reduced ? (
-        <img
-          src={INTRO_POSTER}
-          alt="Karguvel K, AI Architect"
-          width={480}
-          height={600}
-          className="relative z-10 h-full w-full object-contain mix-blend-multiply"
-        />
-      ) : (
-        <>
-          <video
-            ref={videoRef}
-            className="relative z-10 h-full w-full object-contain mix-blend-multiply"
-            src={INTRO_MP4}
-            playsInline
-            loop
-            muted={muted}
-            autoPlay
-            preload="auto"
-            poster={INTRO_POSTER}
-            aria-label="Introduction video of Karguvel K"
-          />
-          <button
-            type="button"
-            className="absolute bottom-4 right-0 z-20 flex h-[46px] min-w-[46px] items-center justify-center gap-1 rounded-full bg-ink px-3 text-paper sm:bottom-6"
-            aria-label={muted ? "Unmute introduction video" : "Mute introduction video"}
-            aria-pressed={!muted}
-            onClick={() => void toggleSound()}
+      <div className="card relative overflow-hidden bg-card p-2 shadow-[0_24px_80px_rgba(13,13,13,0.08)] sm:p-3">
+        <div className="relative mx-auto aspect-[768/960] w-full max-h-[min(88svh,720px)]">
+          <p
+            className="pointer-events-none absolute inset-x-0 top-[9%] z-0 mx-auto w-full max-w-[16ch] text-center text-[clamp(2.2rem,9vw,5.5rem)] font-bold leading-none tracking-[-0.06em] text-transparent"
+            style={{ WebkitTextStroke: "1px rgba(13,13,13,.11)" }}
+            aria-hidden
           >
-            <SoundIcon muted={muted} />
-            <span className="text-xs font-semibold">
-              {muted ? "Sound on" : "Mute"}
-            </span>
-          </button>
-        </>
-      )}
+            KARGUVEL
+          </p>
+
+          {reduced ? (
+            <img
+              src={INTRO_POSTER}
+              alt="Karguvel K, AI Architect"
+              width={480}
+              height={600}
+              className="relative z-10 h-full w-full object-contain mix-blend-multiply"
+            />
+          ) : (
+            <>
+              <video
+                ref={videoRef}
+                className="relative z-10 h-full w-full object-contain mix-blend-multiply"
+                src={INTRO_MP4}
+                playsInline
+                loop
+                muted={muted}
+                autoPlay
+                preload="auto"
+                poster={INTRO_POSTER}
+                aria-label="Introduction video of Karguvel K"
+              />
+              <button
+                type="button"
+                className="absolute bottom-3 right-3 z-20 flex h-[46px] min-w-[46px] items-center justify-center gap-1 rounded-full bg-ink px-3 text-paper shadow-lg"
+                aria-label={muted ? "Unmute introduction video" : "Mute introduction video"}
+                aria-pressed={!muted}
+                onClick={() => void toggleSound()}
+              >
+                <SoundIcon muted={muted} />
+                <span className="text-xs font-semibold">
+                  {muted ? "Sound on" : "Mute"}
+                </span>
+              </button>
+            </>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

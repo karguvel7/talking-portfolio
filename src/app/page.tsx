@@ -1,5 +1,6 @@
 import { AboutSection } from "@/components/about-section";
 import { ContactSection } from "@/components/contact-section";
+import { SiteFooter } from "@/components/site-footer";
 import { DomainsSection } from "@/components/domains-section";
 import { ExperienceSection } from "@/components/experience-section";
 import { HeroSection } from "@/components/hero-section";
@@ -16,6 +17,7 @@ export default function Home() {
       <WorkSection />
       <ExperienceSection />
       <ContactSection />
+      <SiteFooter />
     </>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { NAV, PROFILE } from "@/lib/data";
-import { scrollToTarget } from "@/lib/scroll";
+import { NAV_SCROLL_OFFSET, scrollToTarget } from "@/lib/scroll";
 
 export function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
@@ -109,7 +109,7 @@ export function SiteNav() {
                 href={item.href}
                 onClick={(e) => {
                   e.preventDefault();
-                  scrollToTarget(item.href, -72);
+                  scrollToTarget(item.href, NAV_SCROLL_OFFSET);
                 }}
                 className={`relative z-10 rounded-full px-3 py-2 text-sm font-semibold no-underline transition-colors ${
                   active === item.id ? "text-ink" : "text-mute hover:text-ink"
@@ -127,7 +127,7 @@ export function SiteNav() {
 
           <button
             type="button"
-            className="pill relative z-[80] md:hidden"
+            className="nav-mobile-trigger pill relative z-[80]"
             aria-expanded={open}
             aria-controls="mobile-menu"
             onClick={() => setOpen((v) => !v)}
@@ -162,7 +162,7 @@ export function SiteNav() {
               onClick={(e) => {
                 e.preventDefault();
                 closeMenu();
-                scrollToTarget(item.href, -72);
+                scrollToTarget(item.href, NAV_SCROLL_OFFSET);
               }}
             >
               <span className="font-mono text-base text-mute">

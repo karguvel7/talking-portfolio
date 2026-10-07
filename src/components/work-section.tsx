@@ -20,19 +20,17 @@ export function WorkSection() {
             return (
               <article
                 key={project.id}
-                className={`card relative flex overflow-hidden transition-[flex] duration-700 ease-[var(--ease)] ${
-                  isOpen ? "flex-[8]" : "flex-[1] cursor-pointer"
+                className={`work-panel card spotlight-card relative flex overflow-hidden transition-[flex,box-shadow,transform] duration-700 ease-[var(--ease)] ${
+                  isOpen ? "flex-[8] shadow-[0_20px_60px_rgba(13,13,13,0.08)]" : "flex-[1] cursor-pointer hover:flex-[1.15]"
                 }`}
                 onClick={() => setOpen(i)}
               >
                 {!isOpen && (
-                  <div className="flex h-full w-full flex-col items-center justify-between py-6">
+                  <div className="flex h-full w-full flex-col items-center justify-between py-6 transition-colors hover:bg-soft/40">
                     <span className="font-mono text-sm text-mute">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <p
-                      className="text-sm font-bold [writing-mode:vertical-rl] rotate-180"
-                    >
+                    <p className="text-sm font-bold [writing-mode:vertical-rl] rotate-180">
                       {project.title}
                     </p>
                     <span className="text-xl">+</span>
@@ -60,10 +58,11 @@ export function WorkSection() {
                       </div>
                       {project.href && (
                         <a
-                          className="pill mt-6 inline-flex"
+                          className="pill mt-6 inline-flex transition-transform hover:-translate-y-0.5"
                           href={project.href}
                           target="_blank"
                           rel="noreferrer"
+                          onClick={(e) => e.stopPropagation()}
                         >
                           View on GitHub ↗
                         </a>
@@ -81,7 +80,10 @@ export function WorkSection() {
           {PROJECTS.map((project, i) => {
             const isOpen = open === i;
             return (
-              <article key={project.id} className="card overflow-hidden">
+              <article
+                key={project.id}
+                className="card spotlight-card overflow-hidden transition-shadow hover:shadow-[0_12px_40px_rgba(13,13,13,0.06)]"
+              >
                 <button
                   type="button"
                   className="flex w-full items-center justify-between px-5 py-4 text-left"
