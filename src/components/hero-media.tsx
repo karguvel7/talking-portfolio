@@ -4,9 +4,7 @@ import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useInView } from "@/hooks/useInView";
 import { usePrefersReducedMotion } from "@/hooks/prefersReducedMotion";
-
-const INTRO_MP4 = "/media/intro.mp4";
-const INTRO_POSTER = "/media/intro-poster.webp";
+import { INTRO_MP4, INTRO_POSTER } from "@/lib/assets";
 
 export function HeroMedia() {
   const [wrapRef, inView] = useInView<HTMLDivElement>({ threshold: 0.35, once: false });

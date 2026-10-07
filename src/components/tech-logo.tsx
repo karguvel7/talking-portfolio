@@ -1,22 +1,23 @@
 import Image from "next/image";
+import { logoPath } from "@/lib/assets";
 
 const BRAND: Record<string, string> = {
-  angular: "/logos/angular.svg",
-  react: "/logos/react.svg",
-  "three-js": "/logos/threedotjs.svg",
-  "node-js": "/logos/nodedotjs.svg",
-  python: "/logos/python.svg",
-  mongodb: "/logos/mongodb.svg",
-  neo4j: "/logos/neo4j.svg",
-  mysql: "/logos/mysql.svg",
-  clickhouse: "/logos/clickhouse.svg",
-  aws: "/logos/aws.svg",
-  azure: "/logos/azure.svg",
-  android: "/logos/android.svg",
-  github: "/logos/github.svg",
-  openapi: "/logos/openapi.svg",
-  docker: "/logos/docker.svg",
-  typescript: "/logos/typescript.svg",
+  angular: logoPath("angular.svg"),
+  react: logoPath("react.svg"),
+  "three-js": logoPath("threedotjs.svg"),
+  "node-js": logoPath("nodedotjs.svg"),
+  python: logoPath("python.svg"),
+  mongodb: logoPath("mongodb.svg"),
+  neo4j: logoPath("neo4j.svg"),
+  mysql: logoPath("mysql.svg"),
+  clickhouse: logoPath("clickhouse.svg"),
+  aws: logoPath("aws.svg"),
+  azure: logoPath("azure.svg"),
+  android: logoPath("android.svg"),
+  github: logoPath("github.svg"),
+  openapi: logoPath("openapi.svg"),
+  docker: logoPath("docker.svg"),
+  typescript: logoPath("typescript.svg"),
 };
 
 const CONCEPT: Record<string, string> = {

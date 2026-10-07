@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { PORTRAIT_BUST } from "@/lib/assets";
 import { PROFILE } from "@/lib/data";
 import { usePrefersReducedMotion } from "@/hooks/prefersReducedMotion";
 
@@ -75,7 +76,7 @@ export function IdCard() {
               <div className="flex flex-col items-center px-5 pb-5 pt-4">
                 <div className="h-[156px] w-[128px] overflow-hidden rounded-full ring-2 ring-line">
                   <Image
-                    src="/portrait-bust.webp"
+                    src={PORTRAIT_BUST}
                     alt=""
                     width={128}
                     height={156}
