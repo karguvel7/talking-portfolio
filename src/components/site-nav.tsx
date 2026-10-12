@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { NAV, PROFILE } from "@/lib/data";
+
+const MAIN_PORTFOLIO_LABEL = "Interactive portfolio";
 import { NAV_SCROLL_OFFSET, scrollToTarget } from "@/lib/scroll";
 
 export function SiteNav() {
@@ -131,6 +133,13 @@ export function SiteNav() {
             />
           </nav>
 
+          <a
+            href={PROFILE.mainPortfolioUrl}
+            className="pill hidden shrink-0 md:inline-flex"
+          >
+            {MAIN_PORTFOLIO_LABEL}
+          </a>
+
           <button
             type="button"
             className="nav-mobile-trigger pill relative z-[80]"
@@ -177,6 +186,19 @@ export function SiteNav() {
               {item.label}
             </a>
           ))}
+          <a
+            href={PROFILE.mainPortfolioUrl}
+            tabIndex={open ? 0 : -1}
+            className="rv is-in flex items-baseline gap-4 text-4xl font-bold tracking-tight text-ink no-underline"
+            style={{ "--i": NAV.length } as React.CSSProperties}
+            onClick={closeMenu}
+          >
+            <span className="font-mono text-base text-mute">
+              {String(NAV.length + 1).padStart(2, "0")}
+            </span>
+            {MAIN_PORTFOLIO_LABEL}
+            <span className="text-lg font-semibold text-mute" aria-hidden>↗</span>
+          </a>
         </div>
       </div>
       <ScrollProgressWire />

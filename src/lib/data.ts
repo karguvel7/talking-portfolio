@@ -9,6 +9,8 @@ export const PROFILE = {
   phoneTel: "+918754112397",
   github: "https://github.com/karguvel7",
   siteUrl: "https://karguvel7.github.io",
+  /** Root GitHub Pages site (cinematic interactive portfolio). */
+  mainPortfolioUrl: "https://karguvel7.github.io/",
   initials: "KK",
   idNumber: "IA-2026-09",
   department: "Engineering",

@@ -34,6 +34,11 @@ for (const vp of VIEWPORTS) {
       await page.goto("/");
       await page.waitForLoadState("networkidle");
 
+      const mainPortfolioHref = "https://karguvel7.github.io/";
+      const ctaLink = page.getByRole("link", { name: "Open interactive site" });
+      await ctaLink.scrollIntoViewIfNeeded();
+      await expect(ctaLink).toHaveAttribute("href", mainPortfolioHref);
+
       const overflow = await page.evaluate(
         () => document.documentElement.scrollWidth > window.innerWidth + 1,
       );
@@ -57,6 +62,11 @@ for (const vp of VIEWPORTS) {
       if (isDesktop) {
         await expect(desktopNav).toBeVisible();
         await expect(menuBtn).toBeHidden();
+        const headerPortfolioLink = page
+          .locator("header")
+          .getByRole("link", { name: "Interactive portfolio", exact: true });
+        await expect(headerPortfolioLink).toBeVisible();
+        await expect(headerPortfolioLink).toHaveAttribute("href", mainPortfolioHref);
       } else {
         await expect(menuBtn).toBeVisible();
       }
@@ -69,6 +79,10 @@ for (const vp of VIEWPORTS) {
       if (!isDesktop) {
         await menuBtn.click();
         await expect(page.locator("#mobile-menu")).toHaveAttribute("aria-hidden", "false");
+        const mobilePortfolioLink = page
+          .locator("#mobile-menu")
+          .getByRole("link", { name: /Interactive portfolio/ });
+        await expect(mobilePortfolioLink).toHaveAttribute("href", mainPortfolioHref);
         await page.locator('#mobile-menu a[href="#contact"]').click();
         await expect(page.locator("#contact")).toBeInViewport();
         await menuBtn.click();
