@@ -34,6 +34,17 @@ for (const vp of VIEWPORTS) {
       await page.goto("/");
       await page.waitForLoadState("networkidle");
 
+      const specguardMatches = await page.evaluate(() => {
+        const html = document.documentElement.outerHTML.toLowerCase();
+        const text = document.body?.innerText.toLowerCase() ?? "";
+        return {
+          inHtml: html.includes("specguard"),
+          inText: text.includes("specguard"),
+        };
+      });
+      expect(specguardMatches.inHtml, "specguard in HTML").toBe(false);
+      expect(specguardMatches.inText, "specguard in visible text").toBe(false);
+
       const mainPortfolioHref = "https://karguvel7.github.io/";
       const ctaLink = page.getByRole("link", { name: "Open interactive site" });
       await ctaLink.scrollIntoViewIfNeeded();

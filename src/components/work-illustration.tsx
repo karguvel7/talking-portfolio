@@ -1,26 +1,9 @@
-export function WorkIllustration({ variant }: { variant: "cli" | "platform" | "incident" }) {
+export function WorkIllustration({ variant }: { variant: "platform" | "incident" }) {
   return (
     <div className="relative" aria-hidden>
       <p className="mb-2 font-mono text-xs text-mute">Illustrative UI (not a live product)</p>
       <div className="card overflow-hidden bg-[#faf9f7] p-4">
         <div className="h-48 rounded-xl border border-line bg-white p-3">
-          {variant === "cli" && (
-            <svg viewBox="0 0 320 160" className="h-full w-full" role="img" aria-label="CLI mock">
-              <rect width="320" height="160" fill="#faf9f7" rx="8" />
-              <rect x="12" y="12" width="296" height="24" fill="#0d0d0d" rx="4" />
-              <circle cx="24" cy="24" r="4" fill="#e9e6e0" />
-              <circle cx="36" cy="24" r="4" fill="#e9e6e0" />
-              <circle cx="48" cy="24" r="4" fill="#e9e6e0" />
-              <text x="16" y="58" fontFamily="monospace" fontSize="11" fill="#3a3a3a">
-                $ specguard diff openapi/v1.yaml openapi/v2.yaml
-              </text>
-              <text x="16" y="78" fontFamily="monospace" fontSize="11" fill="#0d0d0d">
-                ✖ breaking: removed GET /users/:id
-              </text>
-              <rect x="16" y="96" width="120" height="8" fill="#e9e6e0" rx="2" />
-              <rect x="16" y="112" width="200" height="8" fill="#e9e6e0" rx="2" />
-            </svg>
-          )}
           {variant === "platform" && (
             <svg viewBox="0 0 320 160" className="h-full w-full" role="img" aria-label="Platform mock">
               <rect width="320" height="160" fill="#fff" rx="8" />

@@ -296,24 +296,10 @@ export type Project = {
   features: string[];
   tech: string[];
   href?: string;
-  uiVariant: "cli" | "platform" | "incident";
+  uiVariant: "platform" | "incident";
 };
 
 export const PROJECTS: Project[] = [
-  {
-    id: "specguard",
-    title: "SpecGuard",
-    summary:
-      "TypeScript OpenAPI 3.0/3.1 breaking-change detector — library, CLI, GitHub Action, and Dockerfile with Vitest coverage.",
-    features: [
-      "Diffs two OpenAPI documents with client-compatibility rules",
-      "CLI with text and JSON reports and configurable fail-on severity",
-      "Composite GitHub Action for CI pipelines",
-      "MIT licensed; no hosted service required",
-    ],
-    tech: ["TypeScript", "OpenAPI", "Vitest", "GitHub Actions", "Docker"],
-    uiVariant: "cli",
-  },
   {
     id: "dtp",
     title: "Digital Transformation Platform",
