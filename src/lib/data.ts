@@ -312,7 +312,6 @@ export const PROJECTS: Project[] = [
       "MIT licensed; no hosted service required",
     ],
     tech: ["TypeScript", "OpenAPI", "Vitest", "GitHub Actions", "Docker"],
-    href: "https://github.com/karguvel7/specguard",
     uiVariant: "cli",
   },
   {
